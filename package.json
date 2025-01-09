@@ -10,7 +10,7 @@
     "clean": "rimraf .next .swc out",
     "lint": "next lint",
     "format": "next lint --fix && prettier '**/*.{json,yaml}' --write --ignore-path .gitignore",
-    "codegen": "wagmi generate --config src/lib/wagmi-cli/wagmi-config.ts",
+    "codegen": "wagmi generate --config src/config/wagmi-cli/wagmi-config.ts",
     "check-types": "tsc --noEmit --pretty",
     "prepare": "husky install"
   },

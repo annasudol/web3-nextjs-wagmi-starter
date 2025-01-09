@@ -3,7 +3,7 @@ import { actions, etherscan, react } from '@wagmi/cli/plugins';
 import type { Abi, Address } from 'viem';
 import { sepolia } from 'viem/chains';
 
-import ttAbi from '@/abi/tt.json';
+import contractABI from '@/abi/contractABI.json';
 
 export default defineConfig(() => {
   const env = loadEnv({
@@ -20,7 +20,7 @@ export default defineConfig(() => {
     contracts: [
       {
         name: 'TokenTransactions',
-        abi: ttAbi as Abi,
+        abi: contractABI as Abi,
         getActionName: (
           action: { name: string },
           contract: { name: string },
