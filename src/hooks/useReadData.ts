@@ -4,7 +4,7 @@ import { erc20Abi } from 'viem';
 import { useAccount, useReadContract } from 'wagmi';
 
 import { envs } from '@/lib/envs';
-import { formatBigInt } from '@/lib/formatBigInt';
+import { formatBigInt } from '@/lib/format/formatBigInt';
 import type { CallContractStatus } from '@/types';
 
 export interface TokenValue {

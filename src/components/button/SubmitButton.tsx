@@ -4,7 +4,7 @@ import type { ButtonProps } from '@nextui-org/button';
 import { useConnectModal } from '@rainbow-me/rainbowkit';
 import { useAccount } from 'wagmi';
 
-import MyButton, { ButtonRightIcon } from '@/components/button/MyButton';
+import { ButtonRightIcon, MyButton } from '@/components/button/MyButton';
 
 interface SubmitButtonProps extends ButtonProps {
   children: React.ReactNode;

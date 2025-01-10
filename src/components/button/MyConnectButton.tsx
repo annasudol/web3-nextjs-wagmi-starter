@@ -1,6 +1,6 @@
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 
-import MyButton, { ButtonRightIcon } from '@/components/button/MyButton';
+import { ButtonRightIcon, MyButton } from '@/components/button/MyButton';
 
 const MyConnectButton = () => {
   return (

@@ -2,11 +2,10 @@
 
 import { useAccount } from 'wagmi';
 
-import { useReadData } from '@/hooks/useReadVault';
+import { Loading } from '@/components/Loading';
+import { useReadData } from '@/hooks/useReadData';
 
-import { Loading } from './Loading';
-
-export function BalanceUIwrapper({ children }: { children: React.ReactNode }) {
+export function TokenCard({ children }: { children: React.ReactNode }) {
   const { balance, token } = useReadData();
   const { address, chain } = useAccount();
 
@@ -23,7 +22,6 @@ export function BalanceUIwrapper({ children }: { children: React.ReactNode }) {
                 </>
               )}
               <span className="ml-2">
-                {' '}
                 {balance?.value?.int} {token.value?.symbol}
               </span>
             </div>

@@ -8,4 +8,5 @@ export const siteConfig = {
   url: 'https://github.com/annasudol/',
   author: 'Anna Sudol',
   author_git: 'https://github.com/annasudol',
+  txConfirmations: 1,
 };

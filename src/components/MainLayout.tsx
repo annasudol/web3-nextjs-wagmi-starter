@@ -3,7 +3,7 @@ import type { PropsWithChildren } from 'react';
 import React from 'react';
 
 import { Footer } from '@/components/Footer';
-import { MainHeader } from '@/components/header/MainHeader';
+import { MainHeader } from '@/components/MainHeader';
 import { MainNavbar } from '@/components/MainNavbar';
 import { siteConfig } from '@/config/siteConfig';
 

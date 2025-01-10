@@ -1,22 +1,24 @@
-import { Card, CardBody } from '@nextui-org/react';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { BalanceUIwrapper } from '@/components/BalanceUIwrapper';
-import { FacetForm } from '@/components/form/FacetForm';
-import { MainLayout } from '@/components/layout/MainLayout';
+import { FacetForm } from '@/components/FacetForm';
+import { MainLayout } from '@/components/MainLayout';
+import { TokenCard } from '@/components/TokenCard';
 
 const HomePage = () => {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
   return (
     <MainLayout>
-      <div className="flex flex-col items-center justify-center gap-8 px-6 sm:py-12 md:flex-row">
-        <Card>
-          <CardBody>
-            <BalanceUIwrapper>
-              <FacetForm />
-            </BalanceUIwrapper>
-          </CardBody>
-        </Card>
-      </div>
+      {isClient && (
+        <div className="flex flex-col items-center justify-center gap-8 px-6 sm:py-12 md:flex-row">
+          <TokenCard>
+            <FacetForm />
+          </TokenCard>
+        </div>
+      )}
     </MainLayout>
   );
 };

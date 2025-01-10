@@ -40,7 +40,7 @@ interface MyButtonProps extends ButtonProps {
   iconLeft?: ButtonLeftIcon;
 }
 
-const MyButton = ({
+export const MyButton = ({
   children,
   iconRight,
   iconLeft,
@@ -73,4 +73,3 @@ const MyButton = ({
     </Button>
   );
 };
-export default MyButton;

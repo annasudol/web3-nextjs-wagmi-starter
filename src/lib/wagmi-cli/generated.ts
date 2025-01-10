@@ -1,32 +1,27 @@
 import {
   createReadContract,
-  createWriteContract,
   createSimulateContract,
   createWatchContractEvent,
-} from 'wagmi/codegen'
-
+  createWriteContract,
+} from '@wagmi/core/codegen';
 import {
   createUseReadContract,
-  createUseWriteContract,
   createUseSimulateContract,
   createUseWatchContractEvent,
-} from 'wagmi/codegen'
+  createUseWriteContract,
+} from 'wagmi/codegen';
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // TT
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /**
- * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xc0b1C98CA5ee61b95D8550214fF19E2A56c93B8d)
+ * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x43bAeD0FA2AA5a5eA269B49EAF26821C6c0B22EF)
  */
 export const ttAbi = [
   {
     type: 'constructor',
-    inputs: [
-      { name: '_name', internalType: 'string', type: 'string' },
-      { name: '_symbol', internalType: 'string', type: 'string' },
-      { name: '_decimals', internalType: 'uint256', type: 'uint256' },
-    ],
+    inputs: [{ name: '_token', internalType: 'address', type: 'address' }],
     stateMutability: 'nonpayable',
   },
   {
@@ -34,83 +29,84 @@ export const ttAbi = [
     anonymous: false,
     inputs: [
       {
-        name: 'owner',
+        name: 'from',
         internalType: 'address',
         type: 'address',
-        indexed: true,
+        indexed: false,
       },
+      { name: 'to', internalType: 'address', type: 'address', indexed: false },
       {
-        name: 'spender',
-        internalType: 'address',
-        type: 'address',
-        indexed: true,
-      },
-      {
-        name: 'value',
+        name: 'amount',
         internalType: 'uint256',
         type: 'uint256',
         indexed: false,
       },
+      {
+        name: 'tx_hash',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+      {
+        name: 'symbol',
+        internalType: 'string',
+        type: 'string',
+        indexed: false,
+      },
     ],
-    name: 'Approval',
+    name: 'RedeemInitialized',
   },
   {
     type: 'event',
     anonymous: false,
     inputs: [
-      { name: 'from', internalType: 'address', type: 'address', indexed: true },
-      { name: 'to', internalType: 'address', type: 'address', indexed: true },
       {
-        name: 'value',
+        name: 'from',
+        internalType: 'address',
+        type: 'address',
+        indexed: false,
+      },
+      { name: 'to', internalType: 'address', type: 'address', indexed: false },
+      {
+        name: 'amount',
         internalType: 'uint256',
         type: 'uint256',
         indexed: false,
       },
+      {
+        name: 'symbol',
+        internalType: 'string',
+        type: 'string',
+        indexed: false,
+      },
     ],
-    name: 'Transfer',
+    name: 'SwapInitialized',
   },
   {
     type: 'function',
-    inputs: [
-      { name: '', internalType: 'address', type: 'address' },
-      { name: '', internalType: 'address', type: 'address' },
-    ],
-    name: 'allowance',
-    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
-    stateMutability: 'view',
-  },
-  {
-    type: 'function',
-    inputs: [
-      { name: 'spender', internalType: 'address', type: 'address' },
-      { name: 'amount', internalType: 'uint256', type: 'uint256' },
-    ],
-    name: 'approve',
-    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
-    stateMutability: 'nonpayable',
-  },
-  {
-    type: 'function',
-    inputs: [{ name: 'account', internalType: 'address', type: 'address' }],
-    name: 'balanceOf',
-    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
-    stateMutability: 'view',
-  },
-  {
-    type: 'function',
-    inputs: [
-      { name: 'from', internalType: 'address', type: 'address' },
-      { name: 'amount', internalType: 'uint256', type: 'uint256' },
-    ],
-    name: 'burn',
+    inputs: [],
+    name: 'facet',
     outputs: [],
     stateMutability: 'nonpayable',
   },
   {
     type: 'function',
-    inputs: [],
-    name: 'decimals',
-    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    inputs: [
+      { name: 'from', internalType: 'address', type: 'address' },
+      { name: 'to', internalType: 'address', type: 'address' },
+      { name: 'amount', internalType: 'uint256', type: 'uint256' },
+      { name: 'tx_hash', internalType: 'uint256', type: 'uint256' },
+      { name: 'symbol', internalType: 'string', type: 'string' },
+    ],
+    name: 'redeem',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: '', internalType: 'address', type: 'address' }],
+    name: 'signatures',
+    outputs: [{ name: '', internalType: 'bytes', type: 'bytes' }],
     stateMutability: 'view',
   },
   {
@@ -118,86 +114,41 @@ export const ttAbi = [
     inputs: [
       { name: 'to', internalType: 'address', type: 'address' },
       { name: 'amount', internalType: 'uint256', type: 'uint256' },
+      { name: 'symbol', internalType: 'string', type: 'string' },
     ],
-    name: 'mint',
+    name: 'swap',
     outputs: [],
     stateMutability: 'nonpayable',
   },
   {
     type: 'function',
     inputs: [],
-    name: 'name',
-    outputs: [{ name: '', internalType: 'string', type: 'string' }],
-    stateMutability: 'view',
-  },
-  {
-    type: 'function',
-    inputs: [],
-    name: 'owner',
+    name: 'token',
     outputs: [{ name: '', internalType: 'address', type: 'address' }],
     stateMutability: 'view',
   },
-  {
-    type: 'function',
-    inputs: [],
-    name: 'symbol',
-    outputs: [{ name: '', internalType: 'string', type: 'string' }],
-    stateMutability: 'view',
-  },
-  {
-    type: 'function',
-    inputs: [],
-    name: 'totalSupply',
-    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
-    stateMutability: 'view',
-  },
-  {
-    type: 'function',
-    inputs: [
-      { name: 'recipient', internalType: 'address', type: 'address' },
-      { name: 'amount', internalType: 'uint256', type: 'uint256' },
-    ],
-    name: 'transfer',
-    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
-    stateMutability: 'nonpayable',
-  },
-  {
-    type: 'function',
-    inputs: [
-      { name: 'sender', internalType: 'address', type: 'address' },
-      { name: 'recipient', internalType: 'address', type: 'address' },
-      { name: 'amount', internalType: 'uint256', type: 'uint256' },
-    ],
-    name: 'transferFrom',
-    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
-    stateMutability: 'nonpayable',
-  },
-] as const
+] as const;
 
 /**
- * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xc0b1C98CA5ee61b95D8550214fF19E2A56c93B8d)
+ * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x43bAeD0FA2AA5a5eA269B49EAF26821C6c0B22EF)
  */
 export const ttAddress = {
-  11155111: '0xc0b1C98CA5ee61b95D8550214fF19E2A56c93B8d',
-} as const
+  11155111: '0x43bAeD0FA2AA5a5eA269B49EAF26821C6c0B22EF',
+} as const;
 
 /**
- * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xc0b1C98CA5ee61b95D8550214fF19E2A56c93B8d)
+ * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x43bAeD0FA2AA5a5eA269B49EAF26821C6c0B22EF)
  */
-export const ttConfig = { address: ttAddress, abi: ttAbi } as const
+export const ttConfig = { address: ttAddress, abi: ttAbi } as const;
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // TokenTransactions
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export const tokenTransactionsAbi = [
   {
     type: 'constructor',
-    inputs: [
-      { name: '_name', internalType: 'string', type: 'string' },
-      { name: '_symbol', internalType: 'string', type: 'string' },
-      { name: '_decimals', internalType: 'uint256', type: 'uint256' },
-    ],
+    inputs: [{ name: '_token', internalType: 'address', type: 'address' }],
     stateMutability: 'nonpayable',
   },
   {
@@ -205,83 +156,84 @@ export const tokenTransactionsAbi = [
     anonymous: false,
     inputs: [
       {
-        name: 'owner',
+        name: 'from',
         internalType: 'address',
         type: 'address',
-        indexed: true,
+        indexed: false,
       },
+      { name: 'to', internalType: 'address', type: 'address', indexed: false },
       {
-        name: 'spender',
-        internalType: 'address',
-        type: 'address',
-        indexed: true,
-      },
-      {
-        name: 'value',
+        name: 'amount',
         internalType: 'uint256',
         type: 'uint256',
         indexed: false,
       },
+      {
+        name: 'tx_hash',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+      {
+        name: 'symbol',
+        internalType: 'string',
+        type: 'string',
+        indexed: false,
+      },
     ],
-    name: 'Approval',
+    name: 'RedeemInitialized',
   },
   {
     type: 'event',
     anonymous: false,
     inputs: [
-      { name: 'from', internalType: 'address', type: 'address', indexed: true },
-      { name: 'to', internalType: 'address', type: 'address', indexed: true },
       {
-        name: 'value',
+        name: 'from',
+        internalType: 'address',
+        type: 'address',
+        indexed: false,
+      },
+      { name: 'to', internalType: 'address', type: 'address', indexed: false },
+      {
+        name: 'amount',
         internalType: 'uint256',
         type: 'uint256',
         indexed: false,
       },
+      {
+        name: 'symbol',
+        internalType: 'string',
+        type: 'string',
+        indexed: false,
+      },
     ],
-    name: 'Transfer',
+    name: 'SwapInitialized',
   },
   {
     type: 'function',
-    inputs: [
-      { name: '', internalType: 'address', type: 'address' },
-      { name: '', internalType: 'address', type: 'address' },
-    ],
-    name: 'allowance',
-    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
-    stateMutability: 'view',
-  },
-  {
-    type: 'function',
-    inputs: [
-      { name: 'spender', internalType: 'address', type: 'address' },
-      { name: 'amount', internalType: 'uint256', type: 'uint256' },
-    ],
-    name: 'approve',
-    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
-    stateMutability: 'nonpayable',
-  },
-  {
-    type: 'function',
-    inputs: [{ name: 'account', internalType: 'address', type: 'address' }],
-    name: 'balanceOf',
-    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
-    stateMutability: 'view',
-  },
-  {
-    type: 'function',
-    inputs: [
-      { name: 'from', internalType: 'address', type: 'address' },
-      { name: 'amount', internalType: 'uint256', type: 'uint256' },
-    ],
-    name: 'burn',
+    inputs: [],
+    name: 'facet',
     outputs: [],
     stateMutability: 'nonpayable',
   },
   {
     type: 'function',
-    inputs: [],
-    name: 'decimals',
-    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    inputs: [
+      { name: 'from', internalType: 'address', type: 'address' },
+      { name: 'to', internalType: 'address', type: 'address' },
+      { name: 'amount', internalType: 'uint256', type: 'uint256' },
+      { name: 'tx_hash', internalType: 'uint256', type: 'uint256' },
+      { name: 'symbol', internalType: 'string', type: 'string' },
+    ],
+    name: 'redeem',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: '', internalType: 'address', type: 'address' }],
+    name: 'signatures',
+    outputs: [{ name: '', internalType: 'bytes', type: 'bytes' }],
     stateMutability: 'view',
   },
   {
@@ -289,949 +241,564 @@ export const tokenTransactionsAbi = [
     inputs: [
       { name: 'to', internalType: 'address', type: 'address' },
       { name: 'amount', internalType: 'uint256', type: 'uint256' },
+      { name: 'symbol', internalType: 'string', type: 'string' },
     ],
-    name: 'mint',
+    name: 'swap',
     outputs: [],
     stateMutability: 'nonpayable',
   },
   {
     type: 'function',
     inputs: [],
-    name: 'name',
-    outputs: [{ name: '', internalType: 'string', type: 'string' }],
-    stateMutability: 'view',
-  },
-  {
-    type: 'function',
-    inputs: [],
-    name: 'owner',
+    name: 'token',
     outputs: [{ name: '', internalType: 'address', type: 'address' }],
     stateMutability: 'view',
   },
-  {
-    type: 'function',
-    inputs: [],
-    name: 'symbol',
-    outputs: [{ name: '', internalType: 'string', type: 'string' }],
-    stateMutability: 'view',
-  },
-  {
-    type: 'function',
-    inputs: [],
-    name: 'totalSupply',
-    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
-    stateMutability: 'view',
-  },
-  {
-    type: 'function',
-    inputs: [
-      { name: 'recipient', internalType: 'address', type: 'address' },
-      { name: 'amount', internalType: 'uint256', type: 'uint256' },
-    ],
-    name: 'transfer',
-    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
-    stateMutability: 'nonpayable',
-  },
-  {
-    type: 'function',
-    inputs: [
-      { name: 'sender', internalType: 'address', type: 'address' },
-      { name: 'recipient', internalType: 'address', type: 'address' },
-      { name: 'amount', internalType: 'uint256', type: 'uint256' },
-    ],
-    name: 'transferFrom',
-    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
-    stateMutability: 'nonpayable',
-  },
-] as const
+] as const;
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Action
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /**
  * Wraps __{@link readContract}__ with `abi` set to __{@link ttAbi}__
  *
- * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xc0b1C98CA5ee61b95D8550214fF19E2A56c93B8d)
+ * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x43bAeD0FA2AA5a5eA269B49EAF26821C6c0B22EF)
  */
-export const readTt = /*#__PURE__*/ createReadContract({
+export const readTt = /* #__PURE__ */ createReadContract({
   abi: ttAbi,
   address: ttAddress,
-})
+});
 
 /**
- * Wraps __{@link readContract}__ with `abi` set to __{@link ttAbi}__ and `functionName` set to `"allowance"`
+ * Wraps __{@link readContract}__ with `abi` set to __{@link ttAbi}__ and `functionName` set to `"signatures"`
  *
- * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xc0b1C98CA5ee61b95D8550214fF19E2A56c93B8d)
+ * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x43bAeD0FA2AA5a5eA269B49EAF26821C6c0B22EF)
  */
-export const readTtAllowance = /*#__PURE__*/ createReadContract({
+export const readTtSignatures = /* #__PURE__ */ createReadContract({
   abi: ttAbi,
   address: ttAddress,
-  functionName: 'allowance',
-})
+  functionName: 'signatures',
+});
 
 /**
- * Wraps __{@link readContract}__ with `abi` set to __{@link ttAbi}__ and `functionName` set to `"balanceOf"`
+ * Wraps __{@link readContract}__ with `abi` set to __{@link ttAbi}__ and `functionName` set to `"token"`
  *
- * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xc0b1C98CA5ee61b95D8550214fF19E2A56c93B8d)
+ * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x43bAeD0FA2AA5a5eA269B49EAF26821C6c0B22EF)
  */
-export const readTtBalanceOf = /*#__PURE__*/ createReadContract({
+export const readTtToken = /* #__PURE__ */ createReadContract({
   abi: ttAbi,
   address: ttAddress,
-  functionName: 'balanceOf',
-})
-
-/**
- * Wraps __{@link readContract}__ with `abi` set to __{@link ttAbi}__ and `functionName` set to `"decimals"`
- *
- * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xc0b1C98CA5ee61b95D8550214fF19E2A56c93B8d)
- */
-export const readTtDecimals = /*#__PURE__*/ createReadContract({
-  abi: ttAbi,
-  address: ttAddress,
-  functionName: 'decimals',
-})
-
-/**
- * Wraps __{@link readContract}__ with `abi` set to __{@link ttAbi}__ and `functionName` set to `"name"`
- *
- * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xc0b1C98CA5ee61b95D8550214fF19E2A56c93B8d)
- */
-export const readTtName = /*#__PURE__*/ createReadContract({
-  abi: ttAbi,
-  address: ttAddress,
-  functionName: 'name',
-})
-
-/**
- * Wraps __{@link readContract}__ with `abi` set to __{@link ttAbi}__ and `functionName` set to `"owner"`
- *
- * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xc0b1C98CA5ee61b95D8550214fF19E2A56c93B8d)
- */
-export const readTtOwner = /*#__PURE__*/ createReadContract({
-  abi: ttAbi,
-  address: ttAddress,
-  functionName: 'owner',
-})
-
-/**
- * Wraps __{@link readContract}__ with `abi` set to __{@link ttAbi}__ and `functionName` set to `"symbol"`
- *
- * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xc0b1C98CA5ee61b95D8550214fF19E2A56c93B8d)
- */
-export const readTtSymbol = /*#__PURE__*/ createReadContract({
-  abi: ttAbi,
-  address: ttAddress,
-  functionName: 'symbol',
-})
-
-/**
- * Wraps __{@link readContract}__ with `abi` set to __{@link ttAbi}__ and `functionName` set to `"totalSupply"`
- *
- * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xc0b1C98CA5ee61b95D8550214fF19E2A56c93B8d)
- */
-export const readTtTotalSupply = /*#__PURE__*/ createReadContract({
-  abi: ttAbi,
-  address: ttAddress,
-  functionName: 'totalSupply',
-})
+  functionName: 'token',
+});
 
 /**
  * Wraps __{@link writeContract}__ with `abi` set to __{@link ttAbi}__
  *
- * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xc0b1C98CA5ee61b95D8550214fF19E2A56c93B8d)
+ * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x43bAeD0FA2AA5a5eA269B49EAF26821C6c0B22EF)
  */
-export const writeTt = /*#__PURE__*/ createWriteContract({
+export const writeTt = /* #__PURE__ */ createWriteContract({
   abi: ttAbi,
   address: ttAddress,
-})
+});
 
 /**
- * Wraps __{@link writeContract}__ with `abi` set to __{@link ttAbi}__ and `functionName` set to `"approve"`
+ * Wraps __{@link writeContract}__ with `abi` set to __{@link ttAbi}__ and `functionName` set to `"facet"`
  *
- * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xc0b1C98CA5ee61b95D8550214fF19E2A56c93B8d)
+ * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x43bAeD0FA2AA5a5eA269B49EAF26821C6c0B22EF)
  */
-export const writeTtApprove = /*#__PURE__*/ createWriteContract({
+export const writeTtFacet = /* #__PURE__ */ createWriteContract({
   abi: ttAbi,
   address: ttAddress,
-  functionName: 'approve',
-})
+  functionName: 'facet',
+});
 
 /**
- * Wraps __{@link writeContract}__ with `abi` set to __{@link ttAbi}__ and `functionName` set to `"burn"`
+ * Wraps __{@link writeContract}__ with `abi` set to __{@link ttAbi}__ and `functionName` set to `"redeem"`
  *
- * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xc0b1C98CA5ee61b95D8550214fF19E2A56c93B8d)
+ * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x43bAeD0FA2AA5a5eA269B49EAF26821C6c0B22EF)
  */
-export const writeTtBurn = /*#__PURE__*/ createWriteContract({
+export const writeTtRedeem = /* #__PURE__ */ createWriteContract({
   abi: ttAbi,
   address: ttAddress,
-  functionName: 'burn',
-})
+  functionName: 'redeem',
+});
 
 /**
- * Wraps __{@link writeContract}__ with `abi` set to __{@link ttAbi}__ and `functionName` set to `"mint"`
+ * Wraps __{@link writeContract}__ with `abi` set to __{@link ttAbi}__ and `functionName` set to `"swap"`
  *
- * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xc0b1C98CA5ee61b95D8550214fF19E2A56c93B8d)
+ * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x43bAeD0FA2AA5a5eA269B49EAF26821C6c0B22EF)
  */
-export const writeTtMint = /*#__PURE__*/ createWriteContract({
+export const writeTtSwap = /* #__PURE__ */ createWriteContract({
   abi: ttAbi,
   address: ttAddress,
-  functionName: 'mint',
-})
-
-/**
- * Wraps __{@link writeContract}__ with `abi` set to __{@link ttAbi}__ and `functionName` set to `"transfer"`
- *
- * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xc0b1C98CA5ee61b95D8550214fF19E2A56c93B8d)
- */
-export const writeTtTransfer = /*#__PURE__*/ createWriteContract({
-  abi: ttAbi,
-  address: ttAddress,
-  functionName: 'transfer',
-})
-
-/**
- * Wraps __{@link writeContract}__ with `abi` set to __{@link ttAbi}__ and `functionName` set to `"transferFrom"`
- *
- * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xc0b1C98CA5ee61b95D8550214fF19E2A56c93B8d)
- */
-export const writeTtTransferFrom = /*#__PURE__*/ createWriteContract({
-  abi: ttAbi,
-  address: ttAddress,
-  functionName: 'transferFrom',
-})
+  functionName: 'swap',
+});
 
 /**
  * Wraps __{@link simulateContract}__ with `abi` set to __{@link ttAbi}__
  *
- * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xc0b1C98CA5ee61b95D8550214fF19E2A56c93B8d)
+ * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x43bAeD0FA2AA5a5eA269B49EAF26821C6c0B22EF)
  */
-export const simulateTt = /*#__PURE__*/ createSimulateContract({
+export const simulateTt = /* #__PURE__ */ createSimulateContract({
   abi: ttAbi,
   address: ttAddress,
-})
+});
 
 /**
- * Wraps __{@link simulateContract}__ with `abi` set to __{@link ttAbi}__ and `functionName` set to `"approve"`
+ * Wraps __{@link simulateContract}__ with `abi` set to __{@link ttAbi}__ and `functionName` set to `"facet"`
  *
- * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xc0b1C98CA5ee61b95D8550214fF19E2A56c93B8d)
+ * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x43bAeD0FA2AA5a5eA269B49EAF26821C6c0B22EF)
  */
-export const simulateTtApprove = /*#__PURE__*/ createSimulateContract({
+export const simulateTtFacet = /* #__PURE__ */ createSimulateContract({
   abi: ttAbi,
   address: ttAddress,
-  functionName: 'approve',
-})
+  functionName: 'facet',
+});
 
 /**
- * Wraps __{@link simulateContract}__ with `abi` set to __{@link ttAbi}__ and `functionName` set to `"burn"`
+ * Wraps __{@link simulateContract}__ with `abi` set to __{@link ttAbi}__ and `functionName` set to `"redeem"`
  *
- * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xc0b1C98CA5ee61b95D8550214fF19E2A56c93B8d)
+ * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x43bAeD0FA2AA5a5eA269B49EAF26821C6c0B22EF)
  */
-export const simulateTtBurn = /*#__PURE__*/ createSimulateContract({
+export const simulateTtRedeem = /* #__PURE__ */ createSimulateContract({
   abi: ttAbi,
   address: ttAddress,
-  functionName: 'burn',
-})
+  functionName: 'redeem',
+});
 
 /**
- * Wraps __{@link simulateContract}__ with `abi` set to __{@link ttAbi}__ and `functionName` set to `"mint"`
+ * Wraps __{@link simulateContract}__ with `abi` set to __{@link ttAbi}__ and `functionName` set to `"swap"`
  *
- * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xc0b1C98CA5ee61b95D8550214fF19E2A56c93B8d)
+ * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x43bAeD0FA2AA5a5eA269B49EAF26821C6c0B22EF)
  */
-export const simulateTtMint = /*#__PURE__*/ createSimulateContract({
+export const simulateTtSwap = /* #__PURE__ */ createSimulateContract({
   abi: ttAbi,
   address: ttAddress,
-  functionName: 'mint',
-})
-
-/**
- * Wraps __{@link simulateContract}__ with `abi` set to __{@link ttAbi}__ and `functionName` set to `"transfer"`
- *
- * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xc0b1C98CA5ee61b95D8550214fF19E2A56c93B8d)
- */
-export const simulateTtTransfer = /*#__PURE__*/ createSimulateContract({
-  abi: ttAbi,
-  address: ttAddress,
-  functionName: 'transfer',
-})
-
-/**
- * Wraps __{@link simulateContract}__ with `abi` set to __{@link ttAbi}__ and `functionName` set to `"transferFrom"`
- *
- * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xc0b1C98CA5ee61b95D8550214fF19E2A56c93B8d)
- */
-export const simulateTtTransferFrom = /*#__PURE__*/ createSimulateContract({
-  abi: ttAbi,
-  address: ttAddress,
-  functionName: 'transferFrom',
-})
+  functionName: 'swap',
+});
 
 /**
  * Wraps __{@link watchContractEvent}__ with `abi` set to __{@link ttAbi}__
  *
- * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xc0b1C98CA5ee61b95D8550214fF19E2A56c93B8d)
+ * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x43bAeD0FA2AA5a5eA269B49EAF26821C6c0B22EF)
  */
-export const watchTtEvent = /*#__PURE__*/ createWatchContractEvent({
+export const watchTtEvent = /* #__PURE__ */ createWatchContractEvent({
   abi: ttAbi,
   address: ttAddress,
-})
+});
 
 /**
- * Wraps __{@link watchContractEvent}__ with `abi` set to __{@link ttAbi}__ and `eventName` set to `"Approval"`
+ * Wraps __{@link watchContractEvent}__ with `abi` set to __{@link ttAbi}__ and `eventName` set to `"RedeemInitialized"`
  *
- * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xc0b1C98CA5ee61b95D8550214fF19E2A56c93B8d)
+ * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x43bAeD0FA2AA5a5eA269B49EAF26821C6c0B22EF)
  */
-export const watchTtApprovalEvent = /*#__PURE__*/ createWatchContractEvent({
-  abi: ttAbi,
-  address: ttAddress,
-  eventName: 'Approval',
-})
+export const watchTtRedeemInitializedEvent =
+  /* #__PURE__ */ createWatchContractEvent({
+    abi: ttAbi,
+    address: ttAddress,
+    eventName: 'RedeemInitialized',
+  });
 
 /**
- * Wraps __{@link watchContractEvent}__ with `abi` set to __{@link ttAbi}__ and `eventName` set to `"Transfer"`
+ * Wraps __{@link watchContractEvent}__ with `abi` set to __{@link ttAbi}__ and `eventName` set to `"SwapInitialized"`
  *
- * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xc0b1C98CA5ee61b95D8550214fF19E2A56c93B8d)
+ * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x43bAeD0FA2AA5a5eA269B49EAF26821C6c0B22EF)
  */
-export const watchTtTransferEvent = /*#__PURE__*/ createWatchContractEvent({
-  abi: ttAbi,
-  address: ttAddress,
-  eventName: 'Transfer',
-})
+export const watchTtSwapInitializedEvent =
+  /* #__PURE__ */ createWatchContractEvent({
+    abi: ttAbi,
+    address: ttAddress,
+    eventName: 'SwapInitialized',
+  });
 
 /**
  * Wraps __{@link readContract}__ with `abi` set to __{@link tokenTransactionsAbi}__
  */
-export const readTokenTransactions = /*#__PURE__*/ createReadContract({
+export const readTokenTransactions = /* #__PURE__ */ createReadContract({
   abi: tokenTransactionsAbi,
-})
+});
 
 /**
- * Wraps __{@link readContract}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `functionName` set to `"allowance"`
+ * Wraps __{@link readContract}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `functionName` set to `"signatures"`
  */
-export const readTokenTransactionsAllowance = /*#__PURE__*/ createReadContract({
-  abi: tokenTransactionsAbi,
-  functionName: 'allowance',
-})
-
-/**
- * Wraps __{@link readContract}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `functionName` set to `"balanceOf"`
- */
-export const readTokenTransactionsBalanceOf = /*#__PURE__*/ createReadContract({
-  abi: tokenTransactionsAbi,
-  functionName: 'balanceOf',
-})
-
-/**
- * Wraps __{@link readContract}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `functionName` set to `"decimals"`
- */
-export const readTokenTransactionsDecimals = /*#__PURE__*/ createReadContract({
-  abi: tokenTransactionsAbi,
-  functionName: 'decimals',
-})
-
-/**
- * Wraps __{@link readContract}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `functionName` set to `"name"`
- */
-export const readTokenTransactionsName = /*#__PURE__*/ createReadContract({
-  abi: tokenTransactionsAbi,
-  functionName: 'name',
-})
-
-/**
- * Wraps __{@link readContract}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `functionName` set to `"owner"`
- */
-export const readTokenTransactionsOwner = /*#__PURE__*/ createReadContract({
-  abi: tokenTransactionsAbi,
-  functionName: 'owner',
-})
-
-/**
- * Wraps __{@link readContract}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `functionName` set to `"symbol"`
- */
-export const readTokenTransactionsSymbol = /*#__PURE__*/ createReadContract({
-  abi: tokenTransactionsAbi,
-  functionName: 'symbol',
-})
-
-/**
- * Wraps __{@link readContract}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `functionName` set to `"totalSupply"`
- */
-export const readTokenTransactionsTotalSupply =
-  /*#__PURE__*/ createReadContract({
+export const readTokenTransactionsSignatures =
+  /* #__PURE__ */ createReadContract({
     abi: tokenTransactionsAbi,
-    functionName: 'totalSupply',
-  })
+    functionName: 'signatures',
+  });
+
+/**
+ * Wraps __{@link readContract}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `functionName` set to `"token"`
+ */
+export const readTokenTransactionsToken = /* #__PURE__ */ createReadContract({
+  abi: tokenTransactionsAbi,
+  functionName: 'token',
+});
 
 /**
  * Wraps __{@link writeContract}__ with `abi` set to __{@link tokenTransactionsAbi}__
  */
-export const writeTokenTransactions = /*#__PURE__*/ createWriteContract({
+export const writeTokenTransactions = /* #__PURE__ */ createWriteContract({
   abi: tokenTransactionsAbi,
-})
+});
 
 /**
- * Wraps __{@link writeContract}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `functionName` set to `"approve"`
+ * Wraps __{@link writeContract}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `functionName` set to `"facet"`
  */
-export const writeTokenTransactionsApprove = /*#__PURE__*/ createWriteContract({
+export const writeTokenTransactionsFacet = /* #__PURE__ */ createWriteContract({
   abi: tokenTransactionsAbi,
-  functionName: 'approve',
-})
+  functionName: 'facet',
+});
 
 /**
- * Wraps __{@link writeContract}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `functionName` set to `"burn"`
+ * Wraps __{@link writeContract}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `functionName` set to `"redeem"`
  */
-export const writeTokenTransactionsBurn = /*#__PURE__*/ createWriteContract({
-  abi: tokenTransactionsAbi,
-  functionName: 'burn',
-})
-
-/**
- * Wraps __{@link writeContract}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `functionName` set to `"mint"`
- */
-export const writeTokenTransactionsMint = /*#__PURE__*/ createWriteContract({
-  abi: tokenTransactionsAbi,
-  functionName: 'mint',
-})
-
-/**
- * Wraps __{@link writeContract}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `functionName` set to `"transfer"`
- */
-export const writeTokenTransactionsTransfer = /*#__PURE__*/ createWriteContract(
-  { abi: tokenTransactionsAbi, functionName: 'transfer' },
-)
-
-/**
- * Wraps __{@link writeContract}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `functionName` set to `"transferFrom"`
- */
-export const writeTokenTransactionsTransferFrom =
-  /*#__PURE__*/ createWriteContract({
+export const writeTokenTransactionsRedeem = /* #__PURE__ */ createWriteContract(
+  {
     abi: tokenTransactionsAbi,
-    functionName: 'transferFrom',
-  })
+    functionName: 'redeem',
+  },
+);
+
+/**
+ * Wraps __{@link writeContract}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `functionName` set to `"swap"`
+ */
+export const writeTokenTransactionsSwap = /* #__PURE__ */ createWriteContract({
+  abi: tokenTransactionsAbi,
+  functionName: 'swap',
+});
 
 /**
  * Wraps __{@link simulateContract}__ with `abi` set to __{@link tokenTransactionsAbi}__
  */
-export const simulateTokenTransactions = /*#__PURE__*/ createSimulateContract({
-  abi: tokenTransactionsAbi,
-})
+export const simulateTokenTransactions = /* #__PURE__ */ createSimulateContract(
+  {
+    abi: tokenTransactionsAbi,
+  },
+);
 
 /**
- * Wraps __{@link simulateContract}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `functionName` set to `"approve"`
+ * Wraps __{@link simulateContract}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `functionName` set to `"facet"`
  */
-export const simulateTokenTransactionsApprove =
-  /*#__PURE__*/ createSimulateContract({
+export const simulateTokenTransactionsFacet =
+  /* #__PURE__ */ createSimulateContract({
     abi: tokenTransactionsAbi,
-    functionName: 'approve',
-  })
+    functionName: 'facet',
+  });
 
 /**
- * Wraps __{@link simulateContract}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `functionName` set to `"burn"`
+ * Wraps __{@link simulateContract}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `functionName` set to `"redeem"`
  */
-export const simulateTokenTransactionsBurn =
-  /*#__PURE__*/ createSimulateContract({
+export const simulateTokenTransactionsRedeem =
+  /* #__PURE__ */ createSimulateContract({
     abi: tokenTransactionsAbi,
-    functionName: 'burn',
-  })
+    functionName: 'redeem',
+  });
 
 /**
- * Wraps __{@link simulateContract}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `functionName` set to `"mint"`
+ * Wraps __{@link simulateContract}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `functionName` set to `"swap"`
  */
-export const simulateTokenTransactionsMint =
-  /*#__PURE__*/ createSimulateContract({
+export const simulateTokenTransactionsSwap =
+  /* #__PURE__ */ createSimulateContract({
     abi: tokenTransactionsAbi,
-    functionName: 'mint',
-  })
-
-/**
- * Wraps __{@link simulateContract}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `functionName` set to `"transfer"`
- */
-export const simulateTokenTransactionsTransfer =
-  /*#__PURE__*/ createSimulateContract({
-    abi: tokenTransactionsAbi,
-    functionName: 'transfer',
-  })
-
-/**
- * Wraps __{@link simulateContract}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `functionName` set to `"transferFrom"`
- */
-export const simulateTokenTransactionsTransferFrom =
-  /*#__PURE__*/ createSimulateContract({
-    abi: tokenTransactionsAbi,
-    functionName: 'transferFrom',
-  })
+    functionName: 'swap',
+  });
 
 /**
  * Wraps __{@link watchContractEvent}__ with `abi` set to __{@link tokenTransactionsAbi}__
  */
 export const watchTokenTransactionsEvent =
-  /*#__PURE__*/ createWatchContractEvent({ abi: tokenTransactionsAbi })
+  /* #__PURE__ */ createWatchContractEvent({ abi: tokenTransactionsAbi });
 
 /**
- * Wraps __{@link watchContractEvent}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `eventName` set to `"Approval"`
+ * Wraps __{@link watchContractEvent}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `eventName` set to `"RedeemInitialized"`
  */
-export const watchTokenTransactionsApprovalEvent =
-  /*#__PURE__*/ createWatchContractEvent({
+export const watchTokenTransactionsRedeemInitializedEvent =
+  /* #__PURE__ */ createWatchContractEvent({
     abi: tokenTransactionsAbi,
-    eventName: 'Approval',
-  })
+    eventName: 'RedeemInitialized',
+  });
 
 /**
- * Wraps __{@link watchContractEvent}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `eventName` set to `"Transfer"`
+ * Wraps __{@link watchContractEvent}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `eventName` set to `"SwapInitialized"`
  */
-export const watchTokenTransactionsTransferEvent =
-  /*#__PURE__*/ createWatchContractEvent({
+export const watchTokenTransactionsSwapInitializedEvent =
+  /* #__PURE__ */ createWatchContractEvent({
     abi: tokenTransactionsAbi,
-    eventName: 'Transfer',
-  })
+    eventName: 'SwapInitialized',
+  });
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // React
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link ttAbi}__
  *
- * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xc0b1C98CA5ee61b95D8550214fF19E2A56c93B8d)
+ * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x43bAeD0FA2AA5a5eA269B49EAF26821C6c0B22EF)
  */
-export const useReadTt = /*#__PURE__*/ createUseReadContract({
+export const useReadTt = /* #__PURE__ */ createUseReadContract({
   abi: ttAbi,
   address: ttAddress,
-})
+});
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link ttAbi}__ and `functionName` set to `"allowance"`
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link ttAbi}__ and `functionName` set to `"signatures"`
  *
- * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xc0b1C98CA5ee61b95D8550214fF19E2A56c93B8d)
+ * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x43bAeD0FA2AA5a5eA269B49EAF26821C6c0B22EF)
  */
-export const useReadTtAllowance = /*#__PURE__*/ createUseReadContract({
+export const useReadTtSignatures = /* #__PURE__ */ createUseReadContract({
   abi: ttAbi,
   address: ttAddress,
-  functionName: 'allowance',
-})
+  functionName: 'signatures',
+});
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link ttAbi}__ and `functionName` set to `"balanceOf"`
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link ttAbi}__ and `functionName` set to `"token"`
  *
- * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xc0b1C98CA5ee61b95D8550214fF19E2A56c93B8d)
+ * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x43bAeD0FA2AA5a5eA269B49EAF26821C6c0B22EF)
  */
-export const useReadTtBalanceOf = /*#__PURE__*/ createUseReadContract({
+export const useReadTtToken = /* #__PURE__ */ createUseReadContract({
   abi: ttAbi,
   address: ttAddress,
-  functionName: 'balanceOf',
-})
-
-/**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link ttAbi}__ and `functionName` set to `"decimals"`
- *
- * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xc0b1C98CA5ee61b95D8550214fF19E2A56c93B8d)
- */
-export const useReadTtDecimals = /*#__PURE__*/ createUseReadContract({
-  abi: ttAbi,
-  address: ttAddress,
-  functionName: 'decimals',
-})
-
-/**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link ttAbi}__ and `functionName` set to `"name"`
- *
- * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xc0b1C98CA5ee61b95D8550214fF19E2A56c93B8d)
- */
-export const useReadTtName = /*#__PURE__*/ createUseReadContract({
-  abi: ttAbi,
-  address: ttAddress,
-  functionName: 'name',
-})
-
-/**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link ttAbi}__ and `functionName` set to `"owner"`
- *
- * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xc0b1C98CA5ee61b95D8550214fF19E2A56c93B8d)
- */
-export const useReadTtOwner = /*#__PURE__*/ createUseReadContract({
-  abi: ttAbi,
-  address: ttAddress,
-  functionName: 'owner',
-})
-
-/**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link ttAbi}__ and `functionName` set to `"symbol"`
- *
- * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xc0b1C98CA5ee61b95D8550214fF19E2A56c93B8d)
- */
-export const useReadTtSymbol = /*#__PURE__*/ createUseReadContract({
-  abi: ttAbi,
-  address: ttAddress,
-  functionName: 'symbol',
-})
-
-/**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link ttAbi}__ and `functionName` set to `"totalSupply"`
- *
- * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xc0b1C98CA5ee61b95D8550214fF19E2A56c93B8d)
- */
-export const useReadTtTotalSupply = /*#__PURE__*/ createUseReadContract({
-  abi: ttAbi,
-  address: ttAddress,
-  functionName: 'totalSupply',
-})
+  functionName: 'token',
+});
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ttAbi}__
  *
- * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xc0b1C98CA5ee61b95D8550214fF19E2A56c93B8d)
+ * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x43bAeD0FA2AA5a5eA269B49EAF26821C6c0B22EF)
  */
-export const useWriteTt = /*#__PURE__*/ createUseWriteContract({
+export const useWriteTt = /* #__PURE__ */ createUseWriteContract({
   abi: ttAbi,
   address: ttAddress,
-})
+});
 
 /**
- * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ttAbi}__ and `functionName` set to `"approve"`
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ttAbi}__ and `functionName` set to `"facet"`
  *
- * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xc0b1C98CA5ee61b95D8550214fF19E2A56c93B8d)
+ * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x43bAeD0FA2AA5a5eA269B49EAF26821C6c0B22EF)
  */
-export const useWriteTtApprove = /*#__PURE__*/ createUseWriteContract({
+export const useWriteTtFacet = /* #__PURE__ */ createUseWriteContract({
   abi: ttAbi,
   address: ttAddress,
-  functionName: 'approve',
-})
+  functionName: 'facet',
+});
 
 /**
- * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ttAbi}__ and `functionName` set to `"burn"`
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ttAbi}__ and `functionName` set to `"redeem"`
  *
- * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xc0b1C98CA5ee61b95D8550214fF19E2A56c93B8d)
+ * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x43bAeD0FA2AA5a5eA269B49EAF26821C6c0B22EF)
  */
-export const useWriteTtBurn = /*#__PURE__*/ createUseWriteContract({
+export const useWriteTtRedeem = /* #__PURE__ */ createUseWriteContract({
   abi: ttAbi,
   address: ttAddress,
-  functionName: 'burn',
-})
+  functionName: 'redeem',
+});
 
 /**
- * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ttAbi}__ and `functionName` set to `"mint"`
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ttAbi}__ and `functionName` set to `"swap"`
  *
- * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xc0b1C98CA5ee61b95D8550214fF19E2A56c93B8d)
+ * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x43bAeD0FA2AA5a5eA269B49EAF26821C6c0B22EF)
  */
-export const useWriteTtMint = /*#__PURE__*/ createUseWriteContract({
+export const useWriteTtSwap = /* #__PURE__ */ createUseWriteContract({
   abi: ttAbi,
   address: ttAddress,
-  functionName: 'mint',
-})
-
-/**
- * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ttAbi}__ and `functionName` set to `"transfer"`
- *
- * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xc0b1C98CA5ee61b95D8550214fF19E2A56c93B8d)
- */
-export const useWriteTtTransfer = /*#__PURE__*/ createUseWriteContract({
-  abi: ttAbi,
-  address: ttAddress,
-  functionName: 'transfer',
-})
-
-/**
- * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ttAbi}__ and `functionName` set to `"transferFrom"`
- *
- * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xc0b1C98CA5ee61b95D8550214fF19E2A56c93B8d)
- */
-export const useWriteTtTransferFrom = /*#__PURE__*/ createUseWriteContract({
-  abi: ttAbi,
-  address: ttAddress,
-  functionName: 'transferFrom',
-})
+  functionName: 'swap',
+});
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ttAbi}__
  *
- * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xc0b1C98CA5ee61b95D8550214fF19E2A56c93B8d)
+ * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x43bAeD0FA2AA5a5eA269B49EAF26821C6c0B22EF)
  */
-export const useSimulateTt = /*#__PURE__*/ createUseSimulateContract({
+export const useSimulateTt = /* #__PURE__ */ createUseSimulateContract({
   abi: ttAbi,
   address: ttAddress,
-})
+});
 
 /**
- * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ttAbi}__ and `functionName` set to `"approve"`
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ttAbi}__ and `functionName` set to `"facet"`
  *
- * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xc0b1C98CA5ee61b95D8550214fF19E2A56c93B8d)
+ * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x43bAeD0FA2AA5a5eA269B49EAF26821C6c0B22EF)
  */
-export const useSimulateTtApprove = /*#__PURE__*/ createUseSimulateContract({
+export const useSimulateTtFacet = /* #__PURE__ */ createUseSimulateContract({
   abi: ttAbi,
   address: ttAddress,
-  functionName: 'approve',
-})
+  functionName: 'facet',
+});
 
 /**
- * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ttAbi}__ and `functionName` set to `"burn"`
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ttAbi}__ and `functionName` set to `"redeem"`
  *
- * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xc0b1C98CA5ee61b95D8550214fF19E2A56c93B8d)
+ * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x43bAeD0FA2AA5a5eA269B49EAF26821C6c0B22EF)
  */
-export const useSimulateTtBurn = /*#__PURE__*/ createUseSimulateContract({
+export const useSimulateTtRedeem = /* #__PURE__ */ createUseSimulateContract({
   abi: ttAbi,
   address: ttAddress,
-  functionName: 'burn',
-})
+  functionName: 'redeem',
+});
 
 /**
- * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ttAbi}__ and `functionName` set to `"mint"`
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ttAbi}__ and `functionName` set to `"swap"`
  *
- * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xc0b1C98CA5ee61b95D8550214fF19E2A56c93B8d)
+ * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x43bAeD0FA2AA5a5eA269B49EAF26821C6c0B22EF)
  */
-export const useSimulateTtMint = /*#__PURE__*/ createUseSimulateContract({
+export const useSimulateTtSwap = /* #__PURE__ */ createUseSimulateContract({
   abi: ttAbi,
   address: ttAddress,
-  functionName: 'mint',
-})
-
-/**
- * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ttAbi}__ and `functionName` set to `"transfer"`
- *
- * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xc0b1C98CA5ee61b95D8550214fF19E2A56c93B8d)
- */
-export const useSimulateTtTransfer = /*#__PURE__*/ createUseSimulateContract({
-  abi: ttAbi,
-  address: ttAddress,
-  functionName: 'transfer',
-})
-
-/**
- * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ttAbi}__ and `functionName` set to `"transferFrom"`
- *
- * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xc0b1C98CA5ee61b95D8550214fF19E2A56c93B8d)
- */
-export const useSimulateTtTransferFrom =
-  /*#__PURE__*/ createUseSimulateContract({
-    abi: ttAbi,
-    address: ttAddress,
-    functionName: 'transferFrom',
-  })
+  functionName: 'swap',
+});
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link ttAbi}__
  *
- * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xc0b1C98CA5ee61b95D8550214fF19E2A56c93B8d)
+ * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x43bAeD0FA2AA5a5eA269B49EAF26821C6c0B22EF)
  */
-export const useWatchTtEvent = /*#__PURE__*/ createUseWatchContractEvent({
+export const useWatchTtEvent = /* #__PURE__ */ createUseWatchContractEvent({
   abi: ttAbi,
   address: ttAddress,
-})
+});
 
 /**
- * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link ttAbi}__ and `eventName` set to `"Approval"`
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link ttAbi}__ and `eventName` set to `"RedeemInitialized"`
  *
- * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xc0b1C98CA5ee61b95D8550214fF19E2A56c93B8d)
+ * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x43bAeD0FA2AA5a5eA269B49EAF26821C6c0B22EF)
  */
-export const useWatchTtApprovalEvent =
-  /*#__PURE__*/ createUseWatchContractEvent({
+export const useWatchTtRedeemInitializedEvent =
+  /* #__PURE__ */ createUseWatchContractEvent({
     abi: ttAbi,
     address: ttAddress,
-    eventName: 'Approval',
-  })
+    eventName: 'RedeemInitialized',
+  });
 
 /**
- * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link ttAbi}__ and `eventName` set to `"Transfer"`
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link ttAbi}__ and `eventName` set to `"SwapInitialized"`
  *
- * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xc0b1C98CA5ee61b95D8550214fF19E2A56c93B8d)
+ * [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x43bAeD0FA2AA5a5eA269B49EAF26821C6c0B22EF)
  */
-export const useWatchTtTransferEvent =
-  /*#__PURE__*/ createUseWatchContractEvent({
+export const useWatchTtSwapInitializedEvent =
+  /* #__PURE__ */ createUseWatchContractEvent({
     abi: ttAbi,
     address: ttAddress,
-    eventName: 'Transfer',
-  })
+    eventName: 'SwapInitialized',
+  });
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenTransactionsAbi}__
  */
-export const useReadTokenTransactions = /*#__PURE__*/ createUseReadContract({
+export const useReadTokenTransactions = /* #__PURE__ */ createUseReadContract({
   abi: tokenTransactionsAbi,
-})
+});
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `functionName` set to `"allowance"`
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `functionName` set to `"signatures"`
  */
-export const useReadTokenTransactionsAllowance =
-  /*#__PURE__*/ createUseReadContract({
+export const useReadTokenTransactionsSignatures =
+  /* #__PURE__ */ createUseReadContract({
     abi: tokenTransactionsAbi,
-    functionName: 'allowance',
-  })
+    functionName: 'signatures',
+  });
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `functionName` set to `"balanceOf"`
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `functionName` set to `"token"`
  */
-export const useReadTokenTransactionsBalanceOf =
-  /*#__PURE__*/ createUseReadContract({
+export const useReadTokenTransactionsToken =
+  /* #__PURE__ */ createUseReadContract({
     abi: tokenTransactionsAbi,
-    functionName: 'balanceOf',
-  })
-
-/**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `functionName` set to `"decimals"`
- */
-export const useReadTokenTransactionsDecimals =
-  /*#__PURE__*/ createUseReadContract({
-    abi: tokenTransactionsAbi,
-    functionName: 'decimals',
-  })
-
-/**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `functionName` set to `"name"`
- */
-export const useReadTokenTransactionsName = /*#__PURE__*/ createUseReadContract(
-  { abi: tokenTransactionsAbi, functionName: 'name' },
-)
-
-/**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `functionName` set to `"owner"`
- */
-export const useReadTokenTransactionsOwner =
-  /*#__PURE__*/ createUseReadContract({
-    abi: tokenTransactionsAbi,
-    functionName: 'owner',
-  })
-
-/**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `functionName` set to `"symbol"`
- */
-export const useReadTokenTransactionsSymbol =
-  /*#__PURE__*/ createUseReadContract({
-    abi: tokenTransactionsAbi,
-    functionName: 'symbol',
-  })
-
-/**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `functionName` set to `"totalSupply"`
- */
-export const useReadTokenTransactionsTotalSupply =
-  /*#__PURE__*/ createUseReadContract({
-    abi: tokenTransactionsAbi,
-    functionName: 'totalSupply',
-  })
+    functionName: 'token',
+  });
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link tokenTransactionsAbi}__
  */
-export const useWriteTokenTransactions = /*#__PURE__*/ createUseWriteContract({
-  abi: tokenTransactionsAbi,
-})
+export const useWriteTokenTransactions = /* #__PURE__ */ createUseWriteContract(
+  {
+    abi: tokenTransactionsAbi,
+  },
+);
 
 /**
- * Wraps __{@link useWriteContract}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `functionName` set to `"approve"`
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `functionName` set to `"facet"`
  */
-export const useWriteTokenTransactionsApprove =
-  /*#__PURE__*/ createUseWriteContract({
+export const useWriteTokenTransactionsFacet =
+  /* #__PURE__ */ createUseWriteContract({
     abi: tokenTransactionsAbi,
-    functionName: 'approve',
-  })
+    functionName: 'facet',
+  });
 
 /**
- * Wraps __{@link useWriteContract}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `functionName` set to `"burn"`
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `functionName` set to `"redeem"`
  */
-export const useWriteTokenTransactionsBurn =
-  /*#__PURE__*/ createUseWriteContract({
+export const useWriteTokenTransactionsRedeem =
+  /* #__PURE__ */ createUseWriteContract({
     abi: tokenTransactionsAbi,
-    functionName: 'burn',
-  })
+    functionName: 'redeem',
+  });
 
 /**
- * Wraps __{@link useWriteContract}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `functionName` set to `"mint"`
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `functionName` set to `"swap"`
  */
-export const useWriteTokenTransactionsMint =
-  /*#__PURE__*/ createUseWriteContract({
+export const useWriteTokenTransactionsSwap =
+  /* #__PURE__ */ createUseWriteContract({
     abi: tokenTransactionsAbi,
-    functionName: 'mint',
-  })
-
-/**
- * Wraps __{@link useWriteContract}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `functionName` set to `"transfer"`
- */
-export const useWriteTokenTransactionsTransfer =
-  /*#__PURE__*/ createUseWriteContract({
-    abi: tokenTransactionsAbi,
-    functionName: 'transfer',
-  })
-
-/**
- * Wraps __{@link useWriteContract}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `functionName` set to `"transferFrom"`
- */
-export const useWriteTokenTransactionsTransferFrom =
-  /*#__PURE__*/ createUseWriteContract({
-    abi: tokenTransactionsAbi,
-    functionName: 'transferFrom',
-  })
+    functionName: 'swap',
+  });
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link tokenTransactionsAbi}__
  */
 export const useSimulateTokenTransactions =
-  /*#__PURE__*/ createUseSimulateContract({ abi: tokenTransactionsAbi })
+  /* #__PURE__ */ createUseSimulateContract({ abi: tokenTransactionsAbi });
 
 /**
- * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `functionName` set to `"approve"`
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `functionName` set to `"facet"`
  */
-export const useSimulateTokenTransactionsApprove =
-  /*#__PURE__*/ createUseSimulateContract({
+export const useSimulateTokenTransactionsFacet =
+  /* #__PURE__ */ createUseSimulateContract({
     abi: tokenTransactionsAbi,
-    functionName: 'approve',
-  })
+    functionName: 'facet',
+  });
 
 /**
- * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `functionName` set to `"burn"`
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `functionName` set to `"redeem"`
  */
-export const useSimulateTokenTransactionsBurn =
-  /*#__PURE__*/ createUseSimulateContract({
+export const useSimulateTokenTransactionsRedeem =
+  /* #__PURE__ */ createUseSimulateContract({
     abi: tokenTransactionsAbi,
-    functionName: 'burn',
-  })
+    functionName: 'redeem',
+  });
 
 /**
- * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `functionName` set to `"mint"`
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `functionName` set to `"swap"`
  */
-export const useSimulateTokenTransactionsMint =
-  /*#__PURE__*/ createUseSimulateContract({
+export const useSimulateTokenTransactionsSwap =
+  /* #__PURE__ */ createUseSimulateContract({
     abi: tokenTransactionsAbi,
-    functionName: 'mint',
-  })
-
-/**
- * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `functionName` set to `"transfer"`
- */
-export const useSimulateTokenTransactionsTransfer =
-  /*#__PURE__*/ createUseSimulateContract({
-    abi: tokenTransactionsAbi,
-    functionName: 'transfer',
-  })
-
-/**
- * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `functionName` set to `"transferFrom"`
- */
-export const useSimulateTokenTransactionsTransferFrom =
-  /*#__PURE__*/ createUseSimulateContract({
-    abi: tokenTransactionsAbi,
-    functionName: 'transferFrom',
-  })
+    functionName: 'swap',
+  });
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link tokenTransactionsAbi}__
  */
 export const useWatchTokenTransactionsEvent =
-  /*#__PURE__*/ createUseWatchContractEvent({ abi: tokenTransactionsAbi })
+  /* #__PURE__ */ createUseWatchContractEvent({ abi: tokenTransactionsAbi });
 
 /**
- * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `eventName` set to `"Approval"`
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `eventName` set to `"RedeemInitialized"`
  */
-export const useWatchTokenTransactionsApprovalEvent =
-  /*#__PURE__*/ createUseWatchContractEvent({
+export const useWatchTokenTransactionsRedeemInitializedEvent =
+  /* #__PURE__ */ createUseWatchContractEvent({
     abi: tokenTransactionsAbi,
-    eventName: 'Approval',
-  })
+    eventName: 'RedeemInitialized',
+  });
 
 /**
- * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `eventName` set to `"Transfer"`
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link tokenTransactionsAbi}__ and `eventName` set to `"SwapInitialized"`
  */
-export const useWatchTokenTransactionsTransferEvent =
-  /*#__PURE__*/ createUseWatchContractEvent({
+export const useWatchTokenTransactionsSwapInitializedEvent =
+  /* #__PURE__ */ createUseWatchContractEvent({
     abi: tokenTransactionsAbi,
-    eventName: 'Transfer',
-  })
+    eventName: 'SwapInitialized',
+  });
