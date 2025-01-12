@@ -1,9 +1,12 @@
 import { useCallback } from 'react';
 import type { Address } from 'viem';
-import { erc20Abi } from 'viem';
-import { useAccount, useReadContract } from 'wagmi';
+import { useAccount } from 'wagmi';
 
-import { envs } from '@/lib/envs';
+import {
+  useEnsBalanceOfread,
+  useEnsDecimalsread,
+  useEnsSymbolread,
+} from '@/config/wagmi-cli/wagmiGenerated';
 import { formatBigInt } from '@/lib/format/formatBigInt';
 import type { CallContractStatus } from '@/types';
 
@@ -49,35 +52,34 @@ export function useReadData(): ReadDataReturn {
   //   functionName: 'token',
   //   address: envs.NEXT_PUBLIC_CONTRACT_SEPOLIA_ADDRESS,
   // });
+  // const {
+  //   data: symbol,
+  //   isLoading: symbolLoading,
+  //   isError: symbolError,
+  // } = useReadContract({
+  //   abi: erc20Abi,
+  //   address: envs.NEXT_PUBLIC_CONTRACT_SEPOLIA_ADDRESS,
+  //   functionName: 'symbol',
+  // });
+
   const {
     data: symbol,
-    isLoading: symbolLoading,
     isError: symbolError,
-  } = useReadContract({
-    abi: erc20Abi,
-    address: envs.NEXT_PUBLIC_CONTRACT_SEPOLIA_ADDRESS,
-    functionName: 'symbol',
-  });
+    isLoading: symbolLoading,
+  } = useEnsSymbolread();
 
   const {
     data: decimals,
-    isLoading: decimalsLoading,
     isError: decimalsError,
-  } = useReadContract({
-    abi: erc20Abi,
-    address: envs.NEXT_PUBLIC_CONTRACT_SEPOLIA_ADDRESS,
-    functionName: 'decimals',
-  });
+    isLoading: decimalsLoading,
+  } = useEnsDecimalsread();
 
   const {
     data: balanceBInt,
     isLoading: balanceBIntLoading,
     isError: balanceBIntError,
     refetch: refetchBalance,
-  } = useReadContract({
-    abi: erc20Abi,
-    address: envs.NEXT_PUBLIC_CONTRACT_SEPOLIA_ADDRESS,
-    functionName: 'balanceOf',
+  } = useEnsBalanceOfread({
     args: [address as Address],
   });
 

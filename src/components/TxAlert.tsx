@@ -34,6 +34,7 @@ export function TxAlert({
           isDisabled={button.disabled}
           onPress={button.onClick}
           variant="solid"
+          className="w-full"
         >
           {button.text}
         </MyButton>

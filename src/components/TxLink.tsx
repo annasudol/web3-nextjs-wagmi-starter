@@ -13,7 +13,7 @@ export function TxLink({ hash, chain = sepolia }: TxLinkProps): JSX.Element {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="text-blue-500 underline"
+      className="my-4 text-blue-500 underline"
     >
       View on {chain.blockExplorers?.default.name}
     </a>

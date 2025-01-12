@@ -20,8 +20,6 @@ export const TransferForm = () => {
   const { transaction } = useTransactionManager();
 
   if (transaction) {
-    console.log(transaction, 'transaction');
-
     return (
       <>
         <TxAlert {...transaction} />

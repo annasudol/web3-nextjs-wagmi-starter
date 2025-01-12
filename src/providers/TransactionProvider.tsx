@@ -14,6 +14,7 @@ export type TransactionMessage = {
   button?: {
     text: string;
     disabled?: boolean;
+    loading?: boolean;
     onClick?: () => void;
   };
 };
