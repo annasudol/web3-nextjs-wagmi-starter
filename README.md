@@ -1,6 +1,5 @@
-# crypto Starter
+# Web3 Wagmi Starter
 
-A web3 Starter 
 
 # Table of content
 
@@ -21,8 +20,8 @@ A web3 Starter
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/annasudol/cross-chain-Starter
-cd cross-chain-Starter
+git clone https://github.com/annasudol/web3-nextjs-wagmi-starter
+cd ceb3-nextjs-wagmi-starter
 ```
 
 2. Install dependencies:
@@ -50,26 +49,10 @@ Visit [http://localhost:3000](http://localhost:3000) to see the application.
 
 
 ## 🌟 Smart Contract used in the app
+ 
+### 0xEb8a559c7F317C24f08405B40e6b1f3c83CDC76c
+[contract at sepolia.etherscan.io] (https://sepolia.etherscan.io/address/0xEb8a559c7F317C24f08405B40e6b1f3c83CDC76c)
 
-/////------------------------TOKENS----------------------------------//////
-## Token sETH on Sepolia Tesnet 
-### 0xB2590B5e4Aa210f1536FA5707B79dD695E781809
-[contract at sepolia.etherscan.io] (https://sepolia.etherscan.io/address/0xB2590B5e4Aa210f1536FA5707B79dD695E781809)
-
-## Token_BSC on Binance Testnet 
-### BSC 0x1C8cd559b58958679886F0Ab10c3455110A4aF2C
-[contract at Bscscan] (https://testnet.bscscan.com/address/0x1C8cd559b58958679886F0Ab10c3455110A4aF2C)
-
-
-/////------------------------StarterS----------------------------------//////
-## Starter Ethereum
-### Sepolia 0x43bAeD0FA2AA5a5eA269B49EAF26821C6c0B22EF
-[contract at sepolia.etherscan.io] (https://sepolia.etherscan.io/address/0x43bAeD0FA2AA5a5eA269B49EAF26821C6c0B22EF)
-
-
-## Starter Bscscan 
-### Bscscan 0x67408729BFD8192673ADc073D4Ca33A56c55811d
-[contract at testnet bscscan] (https://testnet.bscscan.com/address/0x67408729BFD8192673ADc073D4Ca33A56c55811d#code)
 
 ## 📦 Available Scripts
 
