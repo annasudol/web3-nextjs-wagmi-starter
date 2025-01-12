@@ -2,6 +2,7 @@
 
 import { useAccount } from 'wagmi';
 
+import { siteConfig } from '@/config/siteConfig';
 import { useReadData } from '@/hooks/useReadData';
 
 import { Loading } from './Loading';
@@ -11,7 +12,7 @@ export function BalanceUIwrapper({ children }: { children: React.ReactNode }) {
   const { address, chain } = useAccount();
 
   return (
-    <div className="flex h-72 flex-col justify-between py-4 sm:px-4">
+    <div className="flex h-80 flex-col justify-between py-4 sm:px-4">
       <div className="text-sm text-white">
         {address && chain?.id && (
           <>
@@ -24,7 +25,10 @@ export function BalanceUIwrapper({ children }: { children: React.ReactNode }) {
               )}
               <span className="ml-2">
                 {' '}
-                {balance?.value?.int} {token.value?.symbol}
+                {Number(balance?.value?.int).toFixed(
+                  siteConfig.toFixedString,
+                )}{' '}
+                {token.value?.symbol}
               </span>
             </div>
           </>

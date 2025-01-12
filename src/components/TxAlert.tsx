@@ -35,6 +35,9 @@ export function TxAlert({
           onPress={button.onClick}
           variant="solid"
           className="w-full"
+          iconRight={button.iconRight}
+          iconLeft={button.iconLeft}
+          isLoading={button.loading}
         >
           {button.text}
         </MyButton>

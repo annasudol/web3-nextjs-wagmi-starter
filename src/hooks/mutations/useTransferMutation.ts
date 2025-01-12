@@ -1,29 +1,28 @@
 import { useMutation } from '@tanstack/react-query';
 import type { Address, Hash } from 'viem';
 import { waitForTransactionReceipt } from 'viem/actions';
-import { useAccount } from 'wagmi';
 
+import { ButtonLeftIcon } from '@/components/button/MyButton';
 import { rainbowConfig } from '@/config/rainbowConfig';
 import { siteConfig } from '@/config/siteConfig';
 import { useEnsTransferwrite } from '@/config/wagmi-cli/wagmiGenerated';
-// import { rainbowConfig } from '@/config/web3';
 import { useReadData } from '@/hooks/useReadData';
 import { pareseToBigInt } from '@/lib/format/formatBigInt';
 import { logger } from '@/lib/logger';
 import { useTransactionManager } from '@/providers/TransactionProvider';
 
-interface MintMutation {
+export interface TransferMutation {
   amount: string;
+  address: Address;
 }
 export const useTransferMutation = () => {
   const { writeContractAsync } = useEnsTransferwrite();
   const { token, handleRefetchBalance } = useReadData();
   const { addTransaction, updateTransaction, clearTransaction } =
     useTransactionManager();
-  const { address } = useAccount();
 
   return useMutation({
-    mutationFn: async ({ amount }: MintMutation) => {
+    mutationFn: async ({ amount, address }: TransferMutation) => {
       let hash: Address | undefined;
       const amountBint = pareseToBigInt(
         amount,
@@ -31,7 +30,7 @@ export const useTransferMutation = () => {
       );
       try {
         hash = await writeContractAsync({
-          args: [address as Address, amountBint],
+          args: [address, amountBint],
         });
 
         addTransaction({
@@ -40,6 +39,7 @@ export const useTransferMutation = () => {
           title: 'Your transaction is pending',
           button: {
             disabled: true,
+            loading: true,
             text: 'Transaction finalizing...',
           },
         });
@@ -57,9 +57,10 @@ export const useTransferMutation = () => {
           updateTransaction({
             state: 'success',
             title: 'Success!',
-            description: `You have received ${token.value?.symbol}.`,
+            description: `You sent ${amount} ${token.value?.symbol}.`,
             button: {
-              text: 'Reset',
+              text: 'Go Back',
+              iconLeft: ButtonLeftIcon.ArrowLeft,
               onClick: async () => {
                 clearTransaction();
               },
@@ -72,6 +73,7 @@ export const useTransferMutation = () => {
             description: 'Please try again.',
             button: {
               text: 'Retry',
+              iconLeft: ButtonLeftIcon.ArrowLeft,
               onClick: () => clearTransaction(),
             },
           });

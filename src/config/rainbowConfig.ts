@@ -5,7 +5,7 @@ import {
   rabbyWallet,
 } from '@rainbow-me/rainbowkit/wallets';
 import { http } from 'viem';
-import { bscTestnet, sepolia } from 'viem/chains';
+import { sepolia } from 'viem/chains';
 
 import { envs } from '@/lib/envs';
 
@@ -16,7 +16,7 @@ export const T_SEPOLIA_RPC_URL = `https://sepolia.gateway.tenderly.co/${envs.NEX
 export const rainbowConfig = getDefaultConfig({
   appName: siteConfig.title,
   projectId: envs.NEXT_PUBLIC_RAINBOWKIT_PROJECT_ID,
-  chains: [sepolia, bscTestnet],
+  chains: [sepolia],
   wallets: [
     {
       groupName: 'Popular',

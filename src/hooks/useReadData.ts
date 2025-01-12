@@ -34,34 +34,6 @@ interface ReadDataReturn {
 
 export function useReadData(): ReadDataReturn {
   const { address } = useAccount();
-
-  // const {
-  //   data: tokenAddress,
-  //   isLoading: tokenAddressLoading,
-  //   isError: tokenAddressError,
-  // } = useReadContract({
-  //   abi: [
-  //     {
-  //       inputs: [],
-  //       name: 'token',
-  //       outputs: [{ internalType: 'address', name: '', type: 'address' }],
-  //       stateMutability: 'view',
-  //       type: 'function',
-  //     },
-  //   ],
-  //   functionName: 'token',
-  //   address: envs.NEXT_PUBLIC_CONTRACT_SEPOLIA_ADDRESS,
-  // });
-  // const {
-  //   data: symbol,
-  //   isLoading: symbolLoading,
-  //   isError: symbolError,
-  // } = useReadContract({
-  //   abi: erc20Abi,
-  //   address: envs.NEXT_PUBLIC_CONTRACT_SEPOLIA_ADDRESS,
-  //   functionName: 'symbol',
-  // });
-
   const {
     data: symbol,
     isError: symbolError,

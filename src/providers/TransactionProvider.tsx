@@ -2,6 +2,10 @@ import type { ReactNode } from 'react';
 import { createContext, useCallback, useContext, useState } from 'react';
 import type { Hash } from 'viem';
 
+import type {
+  ButtonLeftIcon,
+  ButtonRightIcon,
+} from '@/components/button/MyButton';
 import type { TxAlertProps } from '@/components/TxAlert';
 
 export type TransactionStatus = 'pending' | 'success' | 'failed';
@@ -16,6 +20,8 @@ export type TransactionMessage = {
     disabled?: boolean;
     loading?: boolean;
     onClick?: () => void;
+    iconRight?: ButtonRightIcon;
+    iconLeft?: ButtonLeftIcon;
   };
 };
 

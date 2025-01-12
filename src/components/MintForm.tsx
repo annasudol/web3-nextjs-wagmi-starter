@@ -12,7 +12,7 @@ import { useTransactionManager } from '@/providers/TransactionProvider';
 import { TxAlert } from './TxAlert';
 
 export const MintForm = () => {
-  const { balance, token } = useReadData();
+  const { token } = useReadData();
 
   const { mutateAsync: handleMint, isPending } = useMintMutation();
   const { transaction } = useTransactionManager();
@@ -74,7 +74,7 @@ export const MintForm = () => {
         }) => (
           <form onSubmit={handleSubmit}>
             <TokenTinput
-              label={token.value?.symbol || 'sETH'}
+              label={`${token.value?.symbol} token`}
               labelPlacement="outside"
               name="value"
               onChange={handleChange}
@@ -83,7 +83,6 @@ export const MintForm = () => {
               isInvalid={Boolean(errors.value && touched.value)}
               errorMessage={errors.value}
               disabled={isSubmitting || !token.value?.symbol}
-              max={balance.value?.int}
             />
 
             <SubmitButton

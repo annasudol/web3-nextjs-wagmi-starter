@@ -3,6 +3,7 @@ import type { Address, Hash } from 'viem';
 import { waitForTransactionReceipt } from 'viem/actions';
 import { useAccount } from 'wagmi';
 
+import { ButtonLeftIcon } from '@/components/button/MyButton';
 import { rainbowConfig } from '@/config/rainbowConfig';
 import { siteConfig } from '@/config/siteConfig';
 import { useEnsMintwrite } from '@/config/wagmi-cli/wagmiGenerated';
@@ -39,6 +40,7 @@ export const useMintMutation = () => {
           title: 'Your transaction is pending',
           button: {
             disabled: true,
+            loading: true,
             text: 'Transaction finalizing...',
           },
         });
@@ -56,9 +58,10 @@ export const useMintMutation = () => {
           updateTransaction({
             state: 'success',
             title: 'Success!',
-            description: `You have received ${token.value?.symbol}.`,
+            description: `You have received ${amount} ${token.value?.symbol}.`,
             button: {
-              text: 'Reset',
+              text: 'Go Back',
+              iconLeft: ButtonLeftIcon.ArrowLeft,
               onClick: async () => {
                 clearTransaction();
               },
@@ -71,6 +74,7 @@ export const useMintMutation = () => {
             description: 'Please try again.',
             button: {
               text: 'Retry',
+              iconLeft: ButtonLeftIcon.Cancel,
               onClick: () => clearTransaction(),
             },
           });
