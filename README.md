@@ -1,4 +1,4 @@
-# Web3 Wagmi Starter
+# Web3 Nextjs Wagmi Starter
 ![alt web3 starter](https://github.com/annasudol/web3-nextjs-wagmi-starter/blob/main/public/app.png)
 
 
