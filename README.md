@@ -103,3 +103,5 @@ The project uses wagmi CLI for type-safe contract interactions. Contract ABIs an
 - [wagmi](https://wagmi.sh) for the Ethereum development toolkit
 - [RainbowKit](https://www.rainbowkit.com/) for the wallet connection UI
 - [nextui](https://nextui.org/) for the component library
+
+

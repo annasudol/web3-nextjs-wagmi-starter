@@ -34,6 +34,5 @@ local
 # vercel
 .vercel
 
-.env.local
 .env.development.local
-.env
+config.bat
