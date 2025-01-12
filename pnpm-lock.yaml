@@ -42,8 +42,8 @@ importers:
         specifier: ^10.2.0
         version: 10.2.0(@testing-library/dom@10.4.0)(@types/react@18.3.18)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@wagmi/cli':
-        specifier: ^2.1.17
-        version: 2.1.22(bufferutil@4.0.9)(typescript@5.7.3)(utf-8-validate@5.0.10)
+        specifier: 0.0.0-canary-20241216214945
+        version: 0.0.0-canary-20241216214945(bufferutil@4.0.9)(typescript@5.7.3)(utf-8-validate@5.0.10)
       '@wagmi/connectors':
         specifier: ^5.7.3
         version: 5.7.3(@types/react@18.3.18)(@wagmi/core@2.16.3(@tanstack/query-core@5.62.16)(@types/react@18.3.18)(react@19.0.0)(typescript@5.7.3)(use-sync-external-store@1.4.0(react@19.0.0))(viem@2.22.5(bufferutil@4.0.9)(typescript@5.7.3)(utf-8-validate@5.0.10)(zod@3.24.1)))(bufferutil@4.0.9)(react@19.0.0)(typescript@5.7.3)(utf-8-validate@5.0.10)(viem@2.22.5(bufferutil@4.0.9)(typescript@5.7.3)(utf-8-validate@5.0.10)(zod@3.24.1))(zod@3.24.1)
@@ -2084,8 +2084,8 @@ packages:
     peerDependencies:
       '@vanilla-extract/css': ^1.0.0
 
-  '@wagmi/cli@2.1.22':
-    resolution: {integrity: sha512-aRXwzNHuCIEKs/mceGiPlDBlhdHxXnndL9avYEXByzpGVw37ZChx5CW1potTA8oTFACJpsSs2aaE7cjrRsmzVA==}
+  '@wagmi/cli@0.0.0-canary-20241216214945':
+    resolution: {integrity: sha512-xwczmnSYLpoociGlC+vT7jkXcAH32xgxwXkY56xKl8d/jpau8YWFf5rSRYO1THhNIaDwcq4Ht/JUeKkezQ8hLg==}
     hasBin: true
     peerDependencies:
       typescript: '>=5.0.4'
@@ -8298,7 +8298,7 @@ snapshots:
     dependencies:
       '@vanilla-extract/css': 1.15.5
 
-  '@wagmi/cli@2.1.22(bufferutil@4.0.9)(typescript@5.7.3)(utf-8-validate@5.0.10)':
+  '@wagmi/cli@0.0.0-canary-20241216214945(bufferutil@4.0.9)(typescript@5.7.3)(utf-8-validate@5.0.10)':
     dependencies:
       abitype: 1.0.8(typescript@5.7.3)(zod@3.24.1)
       bundle-require: 4.2.1(esbuild@0.19.12)

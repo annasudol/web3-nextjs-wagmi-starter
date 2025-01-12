@@ -58,7 +58,7 @@ export const MyButton = ({
       {...props}
       className={cn(
         props.variant === 'solid' &&
-          'bg-gradient-to-r from-blue-500 to-purple-500 p-0.5',
+          'bg-gradient-to-r from-blue-500 to-purple-500 p-0.5 text-white',
         className,
       )}
     >

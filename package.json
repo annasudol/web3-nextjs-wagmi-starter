@@ -26,6 +26,7 @@
     "@testing-library/react": "^16.1.0",
     "@types/lodash": "^4.17.13",
     "@types/testing-library__react": "^10.2.0",
+    "@wagmi/cli": "0.0.0-canary-20241216214945",
     "@wagmi/connectors": "^5.7.3",
     "@wagmi/core": "^2.16.3",
     "@web3modal/siwe": "^5.0.3",
@@ -46,11 +47,10 @@
     "react-dom": "^19.0.0",
     "react-icons": "^5.4.0",
     "styled-jsx-plugin-postcss": "^4.0.1",
+    "tslog": "^4.9.3",
     "viem": "^2.21.60",
     "wagmi": "^2.14.1",
-    "zod": "^3.24.1",
-    "@wagmi/cli": "^2.1.17",
-    "tslog": "^4.9.3"
+    "zod": "^3.24.1"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^14.1.0",

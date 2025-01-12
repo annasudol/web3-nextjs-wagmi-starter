@@ -1,29 +1,40 @@
 import { useMutation } from '@tanstack/react-query';
-import type { Address } from 'viem';
+import type { Address, Hash } from 'viem';
 import { waitForTransactionReceipt } from 'viem/actions';
+import { useAccount } from 'wagmi';
 
 import { rainbowConfig } from '@/config/rainbowConfig';
 import { siteConfig } from '@/config/siteConfig';
+import { useEnsMintwrite } from '@/config/wagmi-cli/wagmiGenerated';
 import { useReadData } from '@/hooks/useReadData';
+import { pareseToBigInt } from '@/lib/format/formatBigInt';
 import { logger } from '@/lib/logger';
-import { useWriteTtFacet } from '@/lib/wagmi-cli/generated';
 import { useTransactionManager } from '@/providers/TransactionProvider';
 
+interface MintMutation {
+  amount: string;
+}
 export const useMintMutation = () => {
-  const { writeContractAsync } = useWriteTtFacet();
+  const { writeContractAsync } = useEnsMintwrite();
   const { token, handleRefetchBalance } = useReadData();
   const { addTransaction, updateTransaction, clearTransaction } =
     useTransactionManager();
+  const { address } = useAccount();
 
   return useMutation({
-    mutationFn: async () => {
+    mutationFn: async ({ amount }: MintMutation) => {
       let hash: Address | undefined;
-
+      const amountBint = pareseToBigInt(
+        amount,
+        token?.value?.decimals as number,
+      );
       try {
-        hash = await writeContractAsync({});
+        hash = await writeContractAsync({
+          args: [address as Address, amountBint],
+        });
 
         addTransaction({
-          hash,
+          hash: hash as Hash,
           state: 'pending',
           title: 'Your transaction is pending',
           button: {
@@ -35,7 +46,7 @@ export const useMintMutation = () => {
         const txReceipt = await waitForTransactionReceipt(
           rainbowConfig.getClient(),
           {
-            hash,
+            hash: hash as Hash,
             confirmations: siteConfig.txConfirmations,
           },
         );
@@ -45,7 +56,7 @@ export const useMintMutation = () => {
           updateTransaction({
             state: 'success',
             title: 'Success!',
-            description: `You have received ${token}.`,
+            description: `You have received ${token.value?.symbol}.`,
             button: {
               text: 'Reset',
               onClick: async () => {
@@ -56,7 +67,7 @@ export const useMintMutation = () => {
         } else {
           updateTransaction({
             state: 'failed',
-            title: 'Oh no!',
+            title: 'Oh no! Something went wrong.',
             description: 'Please try again.',
             button: {
               text: 'Retry',
@@ -64,8 +75,6 @@ export const useMintMutation = () => {
             },
           });
         }
-
-        // return txReceipt;
       } catch (error) {
         logger.error(error);
       }

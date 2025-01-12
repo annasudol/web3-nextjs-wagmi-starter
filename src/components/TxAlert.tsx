@@ -7,6 +7,8 @@ import type {
   TransactionStatus,
 } from '@/providers/TransactionProvider';
 
+import { MyButton } from './button/MyButton';
+
 export interface TxAlertProps extends TransactionMessage {
   chain?: Chain;
 }
@@ -16,6 +18,7 @@ export function TxAlert({
   hash,
   chain,
   state,
+  button,
 }: TxAlertProps) {
   const getColor = (txState: TransactionStatus) => {
     if (txState === 'success') return 'success';
@@ -26,6 +29,15 @@ export function TxAlert({
     <div className="my-3 flex w-full flex-col items-center gap-2">
       <Alert color={getColor(state)} title={title} description={description} />
       <TxLink hash={hash} chain={chain} />
+      {button && (
+        <MyButton
+          isDisabled={button.disabled}
+          onPress={button.onClick}
+          variant="solid"
+        >
+          {button.text}
+        </MyButton>
+      )}
     </div>
   );
 }

@@ -32,30 +32,30 @@ interface ReadDataReturn {
 export function useReadData(): ReadDataReturn {
   const { address } = useAccount();
 
-  const {
-    data: tokenAddress,
-    isLoading: tokenAddressLoading,
-    isError: tokenAddressError,
-  } = useReadContract({
-    abi: [
-      {
-        inputs: [],
-        name: 'token',
-        outputs: [{ internalType: 'address', name: '', type: 'address' }],
-        stateMutability: 'view',
-        type: 'function',
-      },
-    ],
-    functionName: 'token',
-    address: envs.NEXT_PUBLIC_CONTRACT_SEPOLIA_ADDRESS,
-  });
+  // const {
+  //   data: tokenAddress,
+  //   isLoading: tokenAddressLoading,
+  //   isError: tokenAddressError,
+  // } = useReadContract({
+  //   abi: [
+  //     {
+  //       inputs: [],
+  //       name: 'token',
+  //       outputs: [{ internalType: 'address', name: '', type: 'address' }],
+  //       stateMutability: 'view',
+  //       type: 'function',
+  //     },
+  //   ],
+  //   functionName: 'token',
+  //   address: envs.NEXT_PUBLIC_CONTRACT_SEPOLIA_ADDRESS,
+  // });
   const {
     data: symbol,
     isLoading: symbolLoading,
     isError: symbolError,
   } = useReadContract({
     abi: erc20Abi,
-    address: tokenAddress,
+    address: envs.NEXT_PUBLIC_CONTRACT_SEPOLIA_ADDRESS,
     functionName: 'symbol',
   });
 
@@ -65,7 +65,7 @@ export function useReadData(): ReadDataReturn {
     isError: decimalsError,
   } = useReadContract({
     abi: erc20Abi,
-    address: tokenAddress,
+    address: envs.NEXT_PUBLIC_CONTRACT_SEPOLIA_ADDRESS,
     functionName: 'decimals',
   });
 
@@ -76,7 +76,7 @@ export function useReadData(): ReadDataReturn {
     refetch: refetchBalance,
   } = useReadContract({
     abi: erc20Abi,
-    address: tokenAddress,
+    address: envs.NEXT_PUBLIC_CONTRACT_SEPOLIA_ADDRESS,
     functionName: 'balanceOf',
     args: [address as Address],
   });
@@ -101,8 +101,8 @@ export function useReadData(): ReadDataReturn {
     balance: {
       value: balance,
       status: {
-        isLoading: balanceBIntLoading || decimalsLoading || tokenAddressLoading,
-        isError: balanceBIntError || decimalsError || tokenAddressError,
+        isLoading: balanceBIntLoading || decimalsLoading,
+        isError: balanceBIntError || decimalsError,
         isSuccess: balance !== undefined,
       },
     },
