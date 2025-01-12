@@ -5,7 +5,7 @@ const MainHeader = () => (
     <div className="mx-auto my-4 max-w-screen-lg">
       <div className="mx-6 text-center">
         <h1 className="text-center text-2xl font-bold">
-          web3{' '}
+          Web3{' '}
           <span className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
             Starter{' '}
           </span>

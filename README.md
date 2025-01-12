@@ -1,4 +1,5 @@
 # Web3 Wagmi Starter
+![alt text](https://github.com/annasudol/web3-nextjs-wagmi-starter/public/app.png?raw=true)
 
 
 # Table of content

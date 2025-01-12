@@ -2,7 +2,7 @@ export const siteConfig = {
   name: 'Web3 Nextjs Starter"',
   emoji: '🚀',
   title: 'Web3 Starter',
-  description: 'Start your next Web3 project with this template.',
+  description: 'Start your Web3 project with this awesome template.',
   locale: 'en',
   url: 'https://github.com/annasudol/',
   author: 'Anna Sudol',
