@@ -3,8 +3,6 @@ import { etherscan, foundry, react } from '@wagmi/cli/plugins';
 import type { Address } from 'viem';
 import { sepolia } from 'viem/chains';
 
-import { CONTRACT } from '@/abi/contract';
-
 const specialCasesUsed: Set<string> = new Set();
 let id = 0;
 export default defineConfig(() => {
@@ -14,7 +12,6 @@ export default defineConfig(() => {
   });
   return {
     out: 'src/config/wagmi-cli/wagmiGenerated.ts',
-    abi: CONTRACT as any,
     plugins: [
       etherscan({
         apiKey: env.NEXT_PUBLIC_ETHERSCAN_API_KEY as string,

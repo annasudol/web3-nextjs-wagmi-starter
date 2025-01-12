@@ -1,4 +1,5 @@
-# Web3 Nextjs Wagmi Starter
+# Web3 Nextjs Frontend Starter
+A modern, type-safe, and user-friendly frontend template for startering web3 project Ethereum. Built with Next.js 14, TypeScript, Tailwind CSS, and wagmi v2, wagmi cli.
 ![alt web3 starter](https://github.com/annasudol/web3-nextjs-wagmi-starter/blob/main/public/app.png)
 
 
@@ -47,7 +48,31 @@ pnpm run dev
 Visit [http://localhost:3000](http://localhost:3000) to see the application.
 
 ```
+## 📁 Project Structure
 
+```sh
+src/
+├── components/ project components
+├── config/ # project configurations
+│ ├── wagmi-cli/ # wagmi codegen
+| ├── rainbowConfig.ts # RainbowKit config
+| ├── siteConfig.ts # Site configuration
+├── lib/ # Utility functions
+| ├── format/ # Formatting functions
+| ├── wagmi-cli/ # wagmi codegen
+| ├── envs.ts # Environment variables
+| ├── logger.ts # Logger
+| ├── zod.ts # Zod schemas for environment variables
+└── providers/ # App level providers
+```
+
+## 🛠 Configuration
+
+### Smart Contract Integration
+
+The project uses wagmi CLI for type-safe contract interactions. Contract ABIs and hooks are auto-generated:
+
+[Generated Lines 1-50](https://github.com/annasudol/web3-nextjs-wagmi-starter/blob/main/src/config/wagmi-cli/wagmiGenerated.ts)
 
 ## 🌟 Smart Contract used in the app
  
@@ -62,6 +87,7 @@ Visit [http://localhost:3000](http://localhost:3000) to see the application.
 - `pnpm run start` - Start production server
 - `pnpm run lint` - Run ESLint
 - `pnpm run format` - Format code with Prettier
+- `pnpm run codegen` - Generate Wagmi hooks and ABI  are auto-generated:
 
 ## 🤝 Contributing
 
