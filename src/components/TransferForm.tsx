@@ -60,7 +60,6 @@ export const TransferForm = () => {
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
-          console.log('values', values);
           handleTransfer({
             amount: values.amount,
             address: values.address as Address,
